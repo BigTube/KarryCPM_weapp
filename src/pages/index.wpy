@@ -1,0 +1,116 @@
+<template>
+  <view class="container">
+    <view class="input-wrap">
+      <wxc-input
+        type="text"
+        title="申购人姓名:"
+        placeholder="请输入申购人姓名"
+        value="Alex"
+        disabled>
+      </wxc-input>
+      <wxc-input
+        type="text"
+        title="申请大区:"
+        placeholder="请输入申请部门"
+        value="东区/上海分公司/仓库操作部"
+        disabled>
+      </wxc-input>
+      <wxc-input
+        type="text"
+        title="条线"
+        placeholder="请输入条线"
+        value="综合物流条线"
+        disabled>
+      </wxc-input>
+      <wxc-input
+        type="text"
+        title="时间要求"
+        placeholder="请选择时间"
+        value="2018/05/22"
+        disabled>
+      </wxc-input>
+      <wxc-input
+        type="text"
+        title="采购类型"
+        placeholder="输入采购类型"
+        value="集中采购">
+      </wxc-input>
+      <wxc-input
+        type="text"
+        title="固定资产类型"
+        placeholder="输入固定资产类型"
+        value="IT">
+      </wxc-input>
+      <wxc-input
+        type="text"
+        title="采购理由"
+        placeholder="输入采购理由">
+      </wxc-input>
+      <wxc-input
+        type="text"
+        title="采购建议"
+        placeholder="输入采购建议">
+      </wxc-input>
+      <view class="price-container">
+        <view>总金额: </view>
+        <wxc-price>7550.00</wxc-price>
+        <view>(柒仟伍佰元整)</view>
+      </view>
+    </view>
+    <view class="container">
+      <view class="button-large-wrap">
+        <wxc-button size="large" type="beauty" loading="{{false}}" value="提交"></wxc-button>
+      </view>
+    </view>
+  </view>
+</template>
+
+<style>
+  .container {
+    width: 100%;
+  }
+
+  .input-wrap {
+    width: 100%;
+    background: #fff;
+  }
+
+  .price-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20rpx 0 30rpx;
+  }
+</style>
+<script>
+  import wepy from 'wepy'
+import moment from 'moment'
+
+export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'test',
+      usingComponents: {
+        'wxc-input': '../../packages/@minui/wxc-input/dist/index',
+        'wxc-price': '../../packages/@minui/wxc-price/dist/index',
+        'wxc-button': '../../packages/@minui/wxc-button/dist/index',
+        'wxc-abnor': '../../packages/@minui/wxc-abnor/dist/index'
+      }
+    };
+
+    data = {
+      time: new Date()
+    };
+
+    computed = {
+      dateText: () => {
+        return moment(this.time).format('YYYY-MM-DD')
+      }
+    };
+
+    methods = {};
+
+    onLoad() {
+    }
+  }
+</script>
