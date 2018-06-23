@@ -1,0 +1,58 @@
+<template>
+  <view class="container">
+    <wxc-button size="large" type="primary" loading="{{false}}" value="确认收货" bindclick="handleScan"></wxc-button>
+    <wxc-toast is-show="{{$toast.show}}" text="{{$toast.title}}" icon="{{$toast.icon}}" icon-color="#ff5777"></wxc-toast>
+  </view>
+</template>
+
+<style lang="less">
+  .container{
+    display: flex;
+    height:100vh;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<script>
+  import wepy from 'wepy'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'DEMO',
+      usingComponents: {
+        'wxc-button': '../../packages/@minui/wxc-button/dist/index',
+        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index'
+      }
+    };
+    data = {
+      $toast: {
+        show: false,
+        title: '',
+        icon: ''
+      }
+    }
+    methods = {
+      handleScan(e) {
+        wepy.scanCode({
+          success: (res) => {
+            console.log(res)
+            this.$toast = {
+              show: true,
+              title: '确认成功，订单号为' + res.result,
+              icon: 'yes'
+            }
+            this.$apply()
+            setTimeout(() => {
+              this.$toast = {
+                show: false,
+                title: '',
+                icon: ''
+              }
+              this.$apply()
+            }, 1500)
+          }
+        })
+      }
+    };
+  }
+</script>

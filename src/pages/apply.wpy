@@ -1,0 +1,185 @@
+<template>
+  <view class="container">
+    <view>
+      <view class="input-wrap" wx:if="{{!success}}">
+        <wxc-input type="text" title="申购人姓名" placeholder="请输入申购人姓名" value="Alex">
+        </wxc-input>
+        <wxc-input type="text" title="申请大区" placeholder="请输入申请部门" value="东区/上海分公司/仓库操作部">
+        </wxc-input>
+        <wxc-input type="text" title="条线" placeholder="请输入条线" value="综合物流条线">
+        </wxc-input>
+        <view class="section">
+          <view class="section-title">时间要求</view>
+          <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+            <view class="picker">
+              {{dateText}}
+            </view>
+          </picker>
+        </view>
+        <view class="section">
+          <view class="section-title">采购类型</view>
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{typeArr}}">
+            <view class="picker">
+              {{typeArr[index]}}
+            </view>
+          </picker>
+        </view>
+        <view class="section">
+          <view class="section-title">资产类型</view>
+          <picker bindchange="bindAssetsPickerChange" value="{{assetsIndex}}" range="{{assetsArr}}">
+            <view class="picker">
+              {{assetsArr[assetsIndex]}}
+            </view>
+          </picker>
+        </view>
+        <wxc-input type="text" title="采购理由" placeholder="输入采购理由">
+        </wxc-input>
+        <wxc-input type="text" title="采购建议" placeholder="输入采购建议">
+        </wxc-input>
+        <view class="price-container">
+          <view>总金额: </view>
+          <wxc-price>7550.00</wxc-price>
+          <view>(柒仟伍佰元整)</view>
+        </view>
+        <view class="container">
+          <view class="button-large-wrap">
+            <wxc-button size="large" type="primary" loading="{{loading}}" value="提交" bindclick="handleButtonClick"></wxc-button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="success-wrapper" wx:if="{{success}}">
+      <image mode="scaleToFill" src="../static/images/icon_success.png"></image>
+      <view>提交成功</view>
+      <wxc-button size="large" type="primary" loading="{{false}}" value="确定" bindclick="handleRedirectNextPage"></wxc-button>
+    </view>
+  </view>
+</template>
+
+<style lang="less">
+  .container {
+    width: 100%;
+  }
+  .input-wrap {
+    width: 100%;
+    background: #fff;
+  }
+  .price-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20rpx 0 30rpx;
+  }
+  .success-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+    view {
+      font-size: 20px;
+      line-height: 80px;
+      font-weight: bold;
+    }
+    image {
+      width: 250rpx;
+      height: 250rpx;
+    }
+  }
+  .section {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    line-height: 1.4;
+    padding: 24rpx 30rpx;
+    box-sizing: border-box;
+    font-size: 28rpx;
+    color: #333;
+    .section-title {
+      min-width: 163rpx;
+      height: 46rpx;
+      line-height: 46rpx;
+      color: #333;
+    }
+    picker {
+      flex: 1;
+      height: 46rpx;
+      min-height: 46rpx;
+      line-height: 46rpx;
+      font-size: 32rpx;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 200%;
+      height: 200%;
+      transform: scale(.5);
+      transform-origin: 0 0;
+      pointer-events: none;
+      box-sizing: border-box;
+      border: 0 solid #e5e5e5;
+      border-bottom-width: 1rpx
+    }
+  }
+</style>
+
+<script>
+  import wepy from 'wepy'
+  import moment from 'moment'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '采购申请',
+      usingComponents: {
+        'wxc-input': '../../packages/@minui/wxc-input/dist/index',
+        'wxc-price': '../../packages/@minui/wxc-price/dist/index',
+        'wxc-button': '../../packages/@minui/wxc-button/dist/index',
+        'wxc-abnor': '../../packages/@minui/wxc-abnor/dist/index'
+      }
+    };
+    data = {
+      date: new Date(),
+      success: false,
+      loading: false,
+      type: '固定资产',
+      typeArr: ['固定资产', 'IT', '车辆相关'],
+      assetsArr: ['不动产', '固定资产', '流动资产'],
+      index: 0,
+      assetsIndex: 0
+    };
+    computed = {
+      dateText: () => {
+        return moment(this.date).format('YYYY-MM-DD')
+      }
+    };
+    methods = {
+      handleButtonClick() {
+        this.loading = true
+        setTimeout(() => {
+          this.loading = false
+          this.success = true
+          this.$apply()
+        }, 1000)
+      },
+      handleRedirectNextPage() {
+        wepy.redirectTo({
+          url: 'index'
+        })
+      },
+      bindDateChange(e) {
+        this.date = e.detail.value
+      },
+      bindPickerChange(e) {
+        this.index = e.detail.value
+      },
+      bindAssetsPickerChange(e) {
+        this.assetsIndex = e.detail.value
+      }
+    };
+    onLoad() {}
+  }
+</script>
