@@ -16,4 +16,7 @@ min install @minui/wxc-price
 min install @minui/wxc-abnor
 min install @minui/wxc-icon
 min install @minui/wxc-button
+npm install @minui/wxc-panel
+npm install @minui/wxc-flex
+npm install @minui/wxc-cc
 ```
