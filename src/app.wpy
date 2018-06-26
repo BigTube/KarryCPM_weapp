@@ -15,6 +15,7 @@
     config = {
       pages: [
         'pages/index',
+        'pages/shopping',
         'pages/shot',
         'pages/apply',
         'pages/audit'

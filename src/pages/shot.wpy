@@ -18,7 +18,7 @@
   import wepy from 'wepy'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: 'DEMO',
+      navigationBarTitleText: 'Karry-CPM',
       usingComponents: {
         'wxc-button': '../../packages/@minui/wxc-button/dist/index',
         'wxc-toast': '../../packages/@minui/wxc-toast/dist/index'

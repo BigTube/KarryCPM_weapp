@@ -18,6 +18,10 @@
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/@minui/wxc-input/download/@minui/wxc-input-1.0.2.tgz#c2ae6a1873ccee0f91fca4cc69ca9b9c6f9c2e9e"
 
+"@minui/wxc-list@^1.0.1":
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/@minui/wxc-list/download/@minui/wxc-list-1.0.1.tgz#4e6e00ae02c4d91899d356115dcab4a4fa28b12d"
+
 "@minui/wxc-price@^1.0.8":
   version "1.0.8"
   resolved "http://registry.npm.taobao.org/@minui/wxc-price/download/@minui/wxc-price-1.0.8.tgz#8471914412958ef4420eaa6bea502b1769c7d0ec"
