@@ -26,6 +26,7 @@
     "@minui/wxc-list": "^1.0.1",
     "@minui/wxc-panel": "^1.0.1",
     "@minui/wxc-price": "^1.0.8",
+    "@minui/wxc-tab": "^1.0.8",
     "@minui/wxc-toast": "^1.0.9",
     "moment": "^2.22.2",
     "wepy": "^1.6.0",

@@ -1,8 +1,24 @@
 <template>
   <view class="list-wrap">
+    <wxc-tab
+      default-index="{{-1}}"
+      component-id="c4"
+      animate="{{true}}"
+    >
+      <wxc-tab-panel
+        wx:for="{{tabs}}"
+        wx:for-item="tab"
+        wx:key="{{tab.content}}"
+        tab-index="{{index}}"
+        component-id="c4"
+        label="{{tab.title}}"
+      >
+        {{tab.content}}
+      </wxc-tab-panel>
+    </wxc-tab>
     <view class="list-item">
       <wxc-panel border="{{false}}" wx:for="{{list}}"
-        wx:key="index">
+        wx:key="{{item.price}}">
         <wxc-flex class="wrap" main="stretch" cross="center">
           <image class="demo__pic" src="{{item.src}}" mode="aspectFit" />
           <view class="right">
@@ -71,10 +87,18 @@ export default class Index extends wepy.page {
       'wxc-list': '../../packages/@minui/wxc-list/dist/index',
       'wxc-icon': '../../packages/@minui/wxc-icon/dist/index',
       'wxc-panel': '../../packages/@minui/wxc-panel/dist/index',
-      'wxc-flex': '../../packages/@minui/wxc-flex/dist/index'
+      'wxc-flex': '../../packages/@minui/wxc-flex/dist/index',
+      'wxc-tab': '../../packages/@minui/wxc-tab/dist/index',
+      'wxc-tab-panel': '../../packages/@minui/wxc-tab/dist/panel'
     }
   };
   data = {
+    tabs: [
+      {title: '笔记本电脑', content: ''},
+      {title: '扫描枪', content: ''},
+      {title: '包装配件', content: ''},
+      {title: '车载数码', content: ''}
+    ],
     list: [
       {
         title: 'Beats耳机',
@@ -159,6 +183,25 @@ export default class Index extends wepy.page {
 
     price() {
       return Math.ceil(Math.random() * 1000) + 1000
+    },
+
+    onClick: function(e) {
+      console.log(`ComponentId:${e.detail.componentId},you selected:${e.detail.key}`);
+      let res = [];
+      const team = this.data.list.splice(0);
+      
+      for (var i = 0, len = team.length; i < len; i++) {
+        // 随机叫个
+        var randomIndex = Math.floor(Math.random() * team.length);
+        // 出列到新队伍
+        res[i] = team[randomIndex];
+        // 原来的队伍人越来越少，因此上面的 randomIndex 需要实时获取 team.length
+        team.splice(randomIndex, 1);
+      }
+      console.log(res[0].title)
+      // this.setData({
+      //   'list': res
+      // });
     }
 
   };
@@ -166,11 +209,22 @@ export default class Index extends wepy.page {
   onReady() {
     //页面渲染完成
     console.log('index Ready');
+
+    // const newData = this.list.map(item => {
+    //   return {
+    //     title: item.title,
+    //     src: item.src,
+    //     desc: this.methods.desc(),
+    //     price: this.methods.price()
+    //   }
+    // });
+
     const newData = this.list.map(item => {
-      item.desc = this.methods.desc();
-      item.price = this.methods.price();
+        item.desc = this.methods.desc();
+        item.price = this.methods.price();
     });
 
+    console.log(newData);
     this.setData({
       'list': newData
     });
