@@ -1,6 +1,16 @@
 <template>
   <view class="container">
-    <wxc-button size="large" type="primary" loading="{{false}}" value="确认收货" bindclick="handleScan"></wxc-button>
+    <view class="input-wrapper">
+        <wxc-input type="text" title="发货人" value="供应商xxx" disabled>
+        </wxc-input>
+        <wxc-input type="text" title="产品信息" value="二维码扫码枪（DS43108-SR）" disabled>
+        </wxc-input>
+        <wxc-input type="text" title="申购人" value="Alex" disabled>
+        </wxc-input>
+        <wxc-input type="text" title="采购金额" value="7500元" disabled>
+        </wxc-input>
+    </view>
+    <wxc-button size="large" type="primary" loading="{{false}}" value="扫码收货" bindclick="handleScan"></wxc-button>
     <wxc-toast is-show="{{$toast.show}}" text="{{$toast.title}}" icon="{{$toast.icon}}" icon-color="#ff5777"></wxc-toast>
   </view>
 </template>
@@ -8,9 +18,11 @@
 <style lang="less">
   .container{
     display: flex;
-    height:100vh;
-    align-items: center;
     justify-content: center;
+  }
+  .input-wrapper {
+    width: 100%;
+    background: #fff;
   }
 </style>
 
@@ -18,10 +30,11 @@
   import wepy from 'wepy'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: 'Karry-CPM',
+      navigationBarTitleText: '扫码收货',
       usingComponents: {
         'wxc-button': '../../packages/@minui/wxc-button/dist/index',
-        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index'
+        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index',
+        'wxc-input': '../../packages/@minui/wxc-input/dist/index',
       }
     };
     data = {

@@ -9,6 +9,8 @@
             <p class="title">{{item.title}}</p>
             <p class="desc">型号: {{item.desc}}</p>
             <p class="desc">价格: {{item.price}} 元</p>
+            <wxc-button size="small" type="info" value="加入购物车"></wxc-button>
+            <wxc-button size="small" type="secondary" value="收藏" class="button-right"></wxc-button>
           </view>
         </wxc-flex>
       </wxc-panel>
@@ -26,8 +28,8 @@
 .wrap {
   display: block;
   height: 250rpx;
-  padding: 30rpx;
-  margin: 20px;
+  padding: 10rpx 20rpx;
+  margin: 20rpx;
   border: 1px solid #eee;
 }
 .list-item {
@@ -52,6 +54,9 @@
   display: block;
   color: #ccc;
   font-size: 12px;
+}
+.button-right{
+  margin-left: 10px;
 }
 </style>
 

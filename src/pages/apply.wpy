@@ -41,6 +41,14 @@
           <wxc-price>7550.00</wxc-price>
           <view>(柒仟伍佰元整)</view>
         </view>
+        <view class="price-container grey">
+          <view>该类预算额度: </view>
+          <wxc-price>200000.00</wxc-price>
+        </view>
+        <view class="price-container grey">
+          <view>该类预算剩余: </view>
+          <wxc-price>170550.00</wxc-price>
+        </view>
         <view class="container">
           <view class="button-large-wrap">
             <wxc-button size="large" type="primary" loading="{{loading}}" value="提交" bindclick="handleButtonClick"></wxc-button>
@@ -53,6 +61,7 @@
       <view>提交成功</view>
       <wxc-button size="large" type="primary" loading="{{false}}" value="确定" bindclick="handleRedirectNextPage"></wxc-button>
     </view>
+    
   </view>
 </template>
 
@@ -71,6 +80,7 @@
     justify-content: center;
     padding: 20rpx 0 30rpx;
   }
+  .grey{color: #999}
   .success-wrapper {
     display: flex;
     justify-content: center;
@@ -138,7 +148,8 @@
         'wxc-input': '../../packages/@minui/wxc-input/dist/index',
         'wxc-price': '../../packages/@minui/wxc-price/dist/index',
         'wxc-button': '../../packages/@minui/wxc-button/dist/index',
-        'wxc-abnor': '../../packages/@minui/wxc-abnor/dist/index'
+        'wxc-abnor': '../../packages/@minui/wxc-abnor/dist/index',
+        'wxc-list': '../../packages/@minui/wxc-list/dist/index',
       }
     };
     data = {
