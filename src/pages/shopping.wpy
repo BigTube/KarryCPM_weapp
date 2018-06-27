@@ -1,9 +1,10 @@
 <template>
   <view class="list-wrap">
     <wxc-tab
-      default-index="{{-1}}"
+      default-index="{{0}}"
       component-id="c4"
       animate="{{true}}"
+      bind:tabchange="random"
     >
       <wxc-tab-panel
         wx:for="{{tabs}}"
@@ -16,9 +17,10 @@
         {{tab.content}}
       </wxc-tab-panel>
     </wxc-tab>
+
     <view class="list-item">
-      <wxc-panel border="{{false}}" wx:for="{{list}}"
-        wx:key="{{item.price}}">
+      <wxc-panel border="{{false}}" wx:for="{{products}}"
+        wx:key="{{desc}}">
         <wxc-flex class="wrap" main="stretch" cross="center">
           <image class="demo__pic" src="{{item.src}}" mode="aspectFit" />
           <view class="right">
@@ -79,7 +81,7 @@
 <script>
 import wepy from 'wepy';
 
-export default class Index extends wepy.page {
+export default class Shopping extends wepy.page {
   config = {
     navigationBarTitleText: '商品列表',
     usingComponents: {
@@ -99,6 +101,7 @@ export default class Index extends wepy.page {
       {title: '包装配件', content: ''},
       {title: '车载数码', content: ''}
     ],
+    // products:[],
     list: [
       {
         title: 'Beats耳机',
@@ -185,48 +188,44 @@ export default class Index extends wepy.page {
       return Math.ceil(Math.random() * 1000) + 1000
     },
 
-    onClick: function(e) {
+    random: function(e) {
       console.log(`ComponentId:${e.detail.componentId},you selected:${e.detail.key}`);
       let res = [];
-      const team = this.data.list.splice(0);
-      
+      const team = this.data.list.slice(0);
+      console.log(team)
       for (var i = 0, len = team.length; i < len; i++) {
         // 随机叫个
         var randomIndex = Math.floor(Math.random() * team.length);
         // 出列到新队伍
         res[i] = team[randomIndex];
+        res[i].desc =  this.methods.desc();
+        res[i].price =  this.methods.price();
         // 原来的队伍人越来越少，因此上面的 randomIndex 需要实时获取 team.length
         team.splice(randomIndex, 1);
       }
-      console.log(res[0].title)
-      // this.setData({
-      //   'list': res
-      // });
+
+      this.setData({
+        'products': res
+      });
     }
 
   };
 
-  onReady() {
+  onLoad() {
     //页面渲染完成
     console.log('index Ready');
-
-    // const newData = this.list.map(item => {
-    //   return {
-    //     title: item.title,
-    //     src: item.src,
-    //     desc: this.methods.desc(),
-    //     price: this.methods.price()
-    //   }
-    // });
-
     const newData = this.list.map(item => {
-        item.desc = this.methods.desc();
-        item.price = this.methods.price();
+      return {
+        title: item.title,
+        src: item.src,
+        desc: this.methods.desc(),
+        price: this.methods.price()
+      }
     });
 
-    console.log(newData);
+    // console.log(newData);
     this.setData({
-      'list': newData
+      'products': newData
     });
   }
 }
