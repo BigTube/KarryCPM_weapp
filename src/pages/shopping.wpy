@@ -5,6 +5,7 @@
       component-id="c4"
       animate="{{true}}"
       bind:tabchange="random"
+      class="tabs"
     >
       <wxc-tab-panel
         wx:for="{{tabs}}"
@@ -37,6 +38,9 @@
 </template>
 
 <style lang="less">
+.tabs{
+  
+}
 .list-wrap {
   width: 100%;
   background: #efefef;
