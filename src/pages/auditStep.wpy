@@ -1,0 +1,55 @@
+<template>
+  <view class="container">
+
+  <wxc-steps steps="{{steps}}" current="{{current}}"></wxc-steps>
+  </view>
+</template>
+
+<style lang="less">
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+</style>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '审批步骤',
+    usingComponents: {
+      'wxc-steps': '../../packages/@minui/wxc-steps/dist/index'
+    }
+  };
+  data = {
+    steps: [
+      {
+        title: '步骤1',
+        desc: '发起申购'
+      },
+      {
+        title: '步骤2',
+        desc: '部门经理同意.'
+      },
+      {
+        title: '步骤3',
+        desc: '部门财务同意'
+      },
+      {
+        title: '步骤4',
+        desc: '大区经理同意.'
+      },
+      {
+        title: '步骤5',
+        desc: '大区财务同意'
+      },
+      {
+        title: '步骤5',
+        desc: '总部同意'
+      }
+    ],
+    current: 3
+  };
+  methods = {};
+}
+</script>

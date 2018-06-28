@@ -20,6 +20,10 @@
         </wxc-flex>
       </wxc-panel>
     </view>
+    <wxc-dialog class="wxc-dialog" title="发起申购" content="是否进入申购流程" 
+      confirm-text="确认" cancel-text="取消" bindconfirm="onConfirm" 
+      bindcancel="onCancel">
+    </wxc-dialog>
     <wxc-toast is-show="{{$toast.show}}" text="{{$toast.title}}" icon="{{$toast.icon}}" icon-color="#ff5777"></wxc-toast>
   </view>
 </template>
@@ -80,6 +84,7 @@ export default class Cart extends wepy.page {
       'wxc-flex': '../../packages/@minui/wxc-flex/dist/index',
       'wxc-tab': '../../packages/@minui/wxc-tab/dist/index',
       'wxc-toast': '../../packages/@minui/wxc-toast/dist/index',
+      'wxc-dialog': '../../packages/@minui/wxc-dialog/dist/index',
       'wxc-tab-panel': '../../packages/@minui/wxc-tab/dist/panel'
     }
   };
@@ -165,6 +170,8 @@ export default class Cart extends wepy.page {
       }
     ]
   };
+
+
   methods = {
     desc() {
       return Math.random()
@@ -198,9 +205,23 @@ export default class Cart extends wepy.page {
     },
 
     gotoApply() {
+      let dialogComponent = this.$wxpage.selectComponent('.wxc-dialog');
+      dialogComponent && dialogComponent.show();
+    },
+
+    hideDialog() {
+      let dialogComponent = this.$wxpage.selectComponent('.wxc-dialog');
+      dialogComponent && dialogComponent.hide();
+    },
+    onConfirm () {
+      this.methods.hideDialog();
       wepy.navigateTo({
-          url: 'apply'
-        })
+        url: 'apply'
+      })
+    },
+    onCancel () {
+      console.log('点击了取消按钮')
+      this.methods.hideDialog();
     },
 
     gotoDelete() {
@@ -223,6 +244,8 @@ export default class Cart extends wepy.page {
   onLoad() {
     //页面渲染完成
     console.log('index Ready');
+    this.methods.hideDialog = this.methods.hideDialog.bind(this);
+
     const newData = this.list.map(item => {
       return {
         title: item.title,

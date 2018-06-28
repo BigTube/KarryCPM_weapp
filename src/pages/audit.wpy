@@ -1,4 +1,7 @@
 <template>
+  <wxc-notice scroll="{{true}}" close="{{true}}" bg-color="#ff9300" bg-rgba="rgba(255, 147, 0, 0)" show-icon="{{true}}" notice="{{notice}}">
+
+  </wxc-notice>
   <view class="container">
     <view>
       <view class="input-wrapper">
@@ -45,10 +48,12 @@
         'wxc-input': '../../packages/@minui/wxc-input/dist/index',
         'wxc-price': '../../packages/@minui/wxc-price/dist/index',
         'wxc-button': '../../packages/@minui/wxc-button/dist/index',
-        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index'
+        'wxc-toast': '../../packages/@minui/wxc-toast/dist/index',
+        'wxc-notice': '../../packages/@minui/wxc-notice/dist/index'
       }
     };
     data = {
+      notice: '您有一条带审批申购',
       $toast: {
         show: false,
         title: '',
@@ -68,7 +73,10 @@
             title: '',
             icon: ''
           }
-          this.$apply()
+          this.$apply();
+          wepy.navigateTo({
+            url: 'auditStep'
+          })
         }, 1500)
       },
       handleReject() {

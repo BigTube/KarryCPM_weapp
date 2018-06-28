@@ -14,11 +14,12 @@
   export default class extends wepy.app {
     config = {
       pages: [
-                'pages/cart',
         'pages/index',
+        'pages/cart',
         'pages/shopping',
         'pages/shot',
         'pages/apply',
+        'pages/auditStep',
         'pages/audit'
       ],
       window: {
