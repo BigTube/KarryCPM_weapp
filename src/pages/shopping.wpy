@@ -2,20 +2,18 @@
   <view class="list-wrap">
     <wxc-tab
       default-index="{{0}}"
-      component-id="c4"
+      component-id="c2"
       animate="{{true}}"
       bind:tabchange="random"
-      class="tabs"
     >
       <wxc-tab-panel
         wx:for="{{tabs}}"
         wx:for-item="tab"
         wx:key="{{tab.content}}"
         tab-index="{{index}}"
-        component-id="c4"
+        component-id="c2"
         label="{{tab.title}}"
       >
-        {{tab.content}}
       </wxc-tab-panel>
     </wxc-tab>
 
@@ -39,6 +37,7 @@
 
 <style lang="less">
 .tabs{}
+.tab_cell{font-size: 11px;}
 .list-wrap {
   width: 100%;
   background: #efefef;
@@ -93,15 +92,16 @@ export default class Shopping extends wepy.page {
       'wxc-panel': '../../packages/@minui/wxc-panel/dist/index',
       'wxc-flex': '../../packages/@minui/wxc-flex/dist/index',
       'wxc-tab': '../../packages/@minui/wxc-tab/dist/index',
-      'wxc-tab-panel': '../../packages/@minui/wxc-tab/dist/panel'
+      'wxc-tab-panel': '../../packages/@minui/wxc-tab/dist/panel',
+      'wxc-tab-label': '../../packages/@minui/wxc-tab/dist/label',
     }
   };
   data = {
     tabs: [
       {title: 'IT设备', content: ''},
-      {title: '仓库固定资产', content: ''},
+      // {title: '仓库固定资产', content: ''},
       {title: '仓库耗材', content: ''},
-      {title: '行政固定资产', content: ''},
+      // {title: '行政固定资产', content: ''},
       {title: '行政耗材', content: ''},
     ],
     // products:[],
@@ -195,7 +195,7 @@ export default class Shopping extends wepy.page {
       console.log(`ComponentId:${e.detail.componentId},you selected:${e.detail.key}`);
       let res = [];
       const team = this.data.list.slice(0);
-      console.log(team)
+      // console.log(team)
       for (var i = 0, len = team.length; i < len; i++) {
         // 随机叫个
         var randomIndex = Math.floor(Math.random() * team.length);
