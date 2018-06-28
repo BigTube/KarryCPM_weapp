@@ -3,7 +3,9 @@
     <view class="list-item">
       <wxc-list class="item" title="采购发起人" arrow="{{false}}">
       </wxc-list>
-      <wxc-list class="item" bindclick="goToShopping" icon="cart" icon-color="#69A0DD" title="商品列表">
+      <wxc-list class="item" bindclick="goToShopping" icon="search" icon-color="#69A0DD" title="商品列表">
+      </wxc-list>
+      <wxc-list class="item" bindclick="goToCart" icon="cart" icon-color="#69A0DD" title="购物车">
       </wxc-list>
       <wxc-list class="item" bindclick="goToApply" icon="star" icon-color="#69A0DD" title="采购申请">
       </wxc-list>
@@ -61,6 +63,11 @@
       goToShopping() {
         wepy.navigateTo({
           url: 'shopping'
+        })
+      },
+      goToCart() {
+        wepy.navigateTo({
+          url: 'cart'
         })
       },
       goToAudit() {
