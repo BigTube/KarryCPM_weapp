@@ -1,4 +1,6 @@
 <template>
+  <wxc-notice scroll="{{true}}" close="{{true}}" bg-color="#7ED321" show-icon="{{true}}" notice="{{notice}}">
+  </wxc-notice>
   <view class="container">
     <view class="list-item">
       <wxc-list class="item" title="采购发起人" arrow="{{false}}">
@@ -9,7 +11,7 @@
       </wxc-list>
       <wxc-list class="item" bindclick="goToApply" icon="star" icon-color="#69A0DD" title="采购申请">
       </wxc-list>
-      <wxc-list class="item" bindclick="goToScan" icon="scan" icon-color="#69A0DD" mode="none" title="确认收货">
+      <wxc-list class="item" bindclick="goToScan" icon="scan" icon-color="#69A0DD" dot="{{true}}" mode="none" title="确认收货">
       </wxc-list>
       <wxc-list class="item mt40" title="采购审批人" arrow="{{false}}">
       </wxc-list>
@@ -53,9 +55,13 @@
       navigationBarTitleText: '中央采购系统',
       usingComponents: {
         'wxc-list': '../../packages/@minui/wxc-list/dist/index',
-        'wxc-cc': '../../packages/@minui/wxc-cc/dist/index'
+        'wxc-cc': '../../packages/@minui/wxc-cc/dist/index',
+        'wxc-notice': '../../packages/@minui/wxc-notice/dist/index'
       }
     };
+    data = {
+      notice: '您有一件等待收货商品,请点击确认收货',
+    }
     methods = {
       goToApply() {
         wepy.navigateTo({

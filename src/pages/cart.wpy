@@ -9,7 +9,7 @@
         <wxc-flex class="wrap" main="between" cross="center">
           <image class="demo__pic" src="{{item.src}}" mode="aspectFit" />
           <view class="right">
-            <p class="title">{{item.title}}</p>
+            <p class="title">{{item.title}} * 3</p>
             <p class="desc">型号: {{item.desc}}</p>
             <p class="desc">价格: {{item.price}} 元</p>
           </view>
@@ -24,12 +24,32 @@
       confirm-text="确认" cancel-text="取消" bindconfirm="onConfirm" 
       bindcancel="onCancel">
     </wxc-dialog>
+    <wxc-dialog class="delete-dialog" title="确定删除" content="是否删除" 
+      confirm-text="确认" cancel-text="取消" bindconfirm="onDeleteConfirm" 
+      bindcancel="onDeleteConfirm">
+    </wxc-dialog>
+    <wxc-dialog class="modify-dialog" title="修改数量" 
+      confirm-text="确认" cancel-text="取消" bindconfirm="onModifyConfirm" 
+      bindcancel="onModifyConfirm">
+      <wxc-flex class="modify" main="center" cross="center">
+        <input class="input" placeholder="商品数量"/>
+        <view class="item">件</view>
+      </wxc-flex>
+    </wxc-dialog>
     <wxc-toast is-show="{{$toast.show}}" text="{{$toast.title}}" icon="{{$toast.icon}}" icon-color="#ff5777"></wxc-toast>
   </view>
 </template>
 
 <style lang="less">
 .tabs{}
+.modify{
+  padding: 10px;
+  .item{margin-left: 10px;}
+  .input{
+    border:1px solid #ccc;
+    width: 100px;
+  }
+}
 .list-wrap {
   width: 100%;
   background: #efefef;
@@ -59,11 +79,12 @@
 }
 .title {
   display: block;
+  font-size: 13px;
 }
 .desc {
   display: block;
   color: #ccc;
-  font-size: 12px;
+  font-size: 11px;
 }
 .button-right{
   margin-left: 10px;
@@ -225,20 +246,22 @@ export default class Cart extends wepy.page {
     },
 
     gotoDelete() {
-      this.$toast = {
-        show: true,
-        title: '是否删除',
-        icon: 'yes'
-      }
-      setTimeout(() => {
-        this.$toast = {
-          show: false,
-          title: '',
-          icon: ''
-        }
-        this.$apply()
-      }, 1500)
-    }
+      let dialogComponent = this.$wxpage.selectComponent('.delete-dialog');
+      dialogComponent && dialogComponent.show();
+    },
+
+    onDeleteConfirm () {
+      let dialogComponent = this.$wxpage.selectComponent('.delete-dialog');
+      dialogComponent && dialogComponent.hide();
+    },
+    gotoModify() {
+      let dialogComponent = this.$wxpage.selectComponent('.modify-dialog');
+      dialogComponent && dialogComponent.show();
+    },
+    onModifyConfirm(){
+      let dialogComponent = this.$wxpage.selectComponent('.modify-dialog');
+      dialogComponent && dialogComponent.hide();
+    },
   };
 
   onLoad() {

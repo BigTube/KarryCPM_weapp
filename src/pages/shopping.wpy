@@ -5,14 +5,29 @@
       component-id="c2"
       animate="{{true}}"
       bind:tabchange="random"
+      class="demo-tab"
     >
+      <view slot="tablabel">
+        <wxc-tab-label
+          wx:for="{{tabs}}"
+          wx:for-item="tab"
+          wx:key="{{tab.title}}"
+          tab-index="{{index}}"
+          component-id="c2"
+        >
+          <view class="demo-tab__label">
+            <view class="demo-tab__text {{ activeKey === index ? 'demo-tab--active' : ''}}">
+              {{tab.title}}
+            </view>
+          </view>
+        </wxc-tab-label>
+      </view>
       <wxc-tab-panel
         wx:for="{{tabs}}"
         wx:for-item="tab"
         wx:key="{{tab.content}}"
         tab-index="{{index}}"
         component-id="c2"
-        label="{{tab.title}}"
       >
       </wxc-tab-panel>
     </wxc-tab>
@@ -27,17 +42,33 @@
             <p class="desc">型号: {{item.desc}}</p>
             <p class="desc">价格: {{item.price}} 元</p>
             <wxc-button size="small" type="info" value="加入购物车" bindclick="gotoCart"></wxc-button>
-            <wxc-button size="small" type="secondary" value="收藏" class="button-right" bindclick="gotoCollection"></wxc-button>
+            <wxc-button size="small" type="selection" value="收藏" class="button-right" bindclick="gotoCollection"></wxc-button>
           </view>
         </wxc-flex>
       </wxc-panel>
     </view>
+    <wxc-toast is-show="{{$toast.show}}" text="{{$toast.title}}" icon="{{$toast.icon}}" icon-color="#ff5777"></wxc-toast>
   </view>
 </template>
 
 <style lang="less">
-.tabs{}
-.tab_cell{font-size: 11px;}
+.demo-tab {
+  .demo-tab__label {
+    width: 100%;
+    margin: 20rpx 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .demo-tab__text {
+    margin-left: 8rpx;
+    font-size: 12px;
+  }
+  .demo-tab--active {
+    color: #ff5777;
+  }
+}
+
 .list-wrap {
   width: 100%;
   background: #efefef;
@@ -91,18 +122,24 @@ export default class Shopping extends wepy.page {
       'wxc-icon': '../../packages/@minui/wxc-icon/dist/index',
       'wxc-panel': '../../packages/@minui/wxc-panel/dist/index',
       'wxc-flex': '../../packages/@minui/wxc-flex/dist/index',
+      'wxc-toast': '../../packages/@minui/wxc-toast/dist/index',
       'wxc-tab': '../../packages/@minui/wxc-tab/dist/index',
       'wxc-tab-panel': '../../packages/@minui/wxc-tab/dist/panel',
       'wxc-tab-label': '../../packages/@minui/wxc-tab/dist/label',
     }
   };
   data = {
+    $toast: {
+      show: false,
+      title: '',
+      icon: ''
+    },
     tabs: [
       {title: 'IT设备', content: ''},
-      // {title: '仓库固定资产', content: ''},
+      {title: '仓库固定资产', content: ''},
       {title: '仓库耗材', content: ''},
-      // {title: '行政固定资产', content: ''},
-      {title: '行政耗材', content: ''},
+      {title: '行政固定资产', content: ''},
+      // {title: '行政耗材', content: ''},
     ],
     // products:[],
     list: [
@@ -219,9 +256,19 @@ export default class Shopping extends wepy.page {
     },
     
     gotoCollection() {
-      wepy.navigateTo({
-          url: 'collection'
-        })
+      this.$toast = {
+          show: true,
+          title: '添加收藏成功',
+          icon: 'yes'
+        }
+        setTimeout(() => {
+          this.$toast = {
+            show: false,
+            title: '',
+            icon: ''
+          }
+          this.$apply();
+        }, 1000)
     }
 
   };
