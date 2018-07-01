@@ -1,7 +1,10 @@
 <template>
   <view class="list-wrap">
     <wxc-flex main="center" cross="center">
-      <wxc-button size="large" type="info" value="申请采购" bindclick="gotoApply"></wxc-button>
+      <wxc-button size="large" type="info" bindclick="gotoApply">
+        <wxc-icon color="#fff" size="36" type="arrow-right"></wxc-icon>
+        发起采购流程
+      </wxc-button>
     </wxc-flex>
     <view class="list-item">
       <wxc-panel border="{{false}}" wx:for="{{products}}"
@@ -20,7 +23,7 @@
         </wxc-flex>
       </wxc-panel>
     </view>
-    <wxc-dialog class="wxc-dialog" title="发起申购" content="是否进入申购流程" 
+    <wxc-dialog class="wxc-dialog" title="发起采购流程" content="是否进入采购流程" 
       confirm-text="确认" cancel-text="取消" bindconfirm="onConfirm" 
       bindcancel="onCancel">
     </wxc-dialog>
@@ -48,6 +51,7 @@
   .input{
     border:1px solid #ccc;
     width: 100px;
+    font-size: 12px;
   }
 }
 .list-wrap {

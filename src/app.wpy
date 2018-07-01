@@ -16,8 +16,8 @@
       pages: [
         'pages/index',
         'pages/cart',
-        'pages/shopping',
         'pages/shot',
+        'pages/shopping',
         'pages/apply',
         'pages/auditStep',
         'pages/audit'

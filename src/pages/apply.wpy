@@ -58,7 +58,8 @@
     </view>
     <view class="success-wrapper" wx:if="{{success}}">
       <image mode="scaleToFill" src="../static/images/icon_success.png"></image>
-      <view>提交成功</view>
+      <view class="title">提交采购成功</view>
+      <view class="confirm-content">请注意采购单KCP-001的审批记录</view>
       <wxc-button size="large" type="primary" loading="{{false}}" value="确定" bindclick="handleRedirectNextPage"></wxc-button>
     </view>
     
@@ -87,10 +88,14 @@
     align-items: center;
     flex-direction: column;
     height: 80vh;
-    view {
+    .title {
       font-size: 20px;
-      line-height: 80px;
+      line-height: 40px;
       font-weight: bold;
+    }
+    .confirm-content{
+      font-size: 12px;
+      margin-bottom: 10vh;
     }
     image {
       width: 250rpx;
@@ -135,6 +140,7 @@
       border: 0 solid #e5e5e5;
       border-bottom-width: 1rpx
     }
+
   }
 </style>
 

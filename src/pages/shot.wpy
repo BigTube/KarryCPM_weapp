@@ -1,6 +1,7 @@
 <template>
   <view class="container">
     <view class="input-wrapper">
+      <view class="title">您需要确认的商品是</view>
         <wxc-input type="text" title="发货人" value="供应商xxx" disabled>
         </wxc-input>
         <wxc-input type="text" title="产品信息" value="二维码扫码枪（DS43108-SR）" disabled>
@@ -10,12 +11,23 @@
         <wxc-input type="text" title="采购金额" value="7500元" disabled>
         </wxc-input>
     </view>
-    <wxc-button size="large" type="primary" loading="{{false}}" value="扫码收货" bindclick="handleScan"></wxc-button>
+    <wxc-button class="confirmButton" size="large" type="primary" loading="{{false}}" bindclick="handleScan">
+      <wxc-icon color="#fff" size="36" type="scan"></wxc-icon>
+      扫码收货
+    </wxc-button>
     <wxc-toast is-show="{{$toast.show}}" text="{{$toast.title}}" icon="{{$toast.icon}}" icon-color="#ff5777"></wxc-toast>
   </view>
 </template>
 
 <style lang="less">
+  .title{
+    text-align: center;
+    font-size: 12px;
+    margin: 10px 0px;
+  }
+  .confirmButton{
+    margin-top: 20px;
+  }
   .container{
     display: flex;
     justify-content: center;
@@ -35,6 +47,7 @@
         'wxc-button': '../../packages/@minui/wxc-button/dist/index',
         'wxc-toast': '../../packages/@minui/wxc-toast/dist/index',
         'wxc-input': '../../packages/@minui/wxc-input/dist/index',
+        'wxc-icon': '../../packages/@minui/wxc-icon/dist/index'
       }
     };
     data = {

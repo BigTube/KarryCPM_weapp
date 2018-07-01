@@ -25,7 +25,7 @@ export default class Index extends wepy.page {
     steps: [
       {
         title: '步骤1',
-        desc: '发起申购'
+        desc: '发起采购'
       },
       {
         title: '步骤2',
